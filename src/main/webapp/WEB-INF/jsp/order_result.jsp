@@ -13,7 +13,10 @@
 	<form class="pure-form">
 		<fieldset>
 			<legend>Order Result</legend>
-
+			${ p_id }
+			<p />
+			${ total }
+			<p />
 			<button 
 				type="button" 
 				class="pure-button pure-button-primary"

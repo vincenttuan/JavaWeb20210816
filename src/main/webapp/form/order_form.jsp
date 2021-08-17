@@ -36,7 +36,7 @@
 					<input name="p_discount" type="radio" value="0.7"> 7折
 			<p />
 			備註說明 :<br />
-			<textarea rows="5" cols="32"></textarea>
+			<textarea name="p_memo" rows="5" cols="32"></textarea>
 			<p />
 				
 			<button 
