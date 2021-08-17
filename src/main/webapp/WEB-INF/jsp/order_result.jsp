@@ -13,9 +13,9 @@
 	<form class="pure-form">
 		<fieldset>
 			<legend>Order Result</legend>
-			${ p_id }
+			商品名稱 : ${ p_id }
 			<p />
-			${ total }
+			消費金額 : ${ total }
 			<p />
 			<button 
 				type="button" 
