@@ -10,7 +10,7 @@
 </head>
 <body style="padding: 15px;">
 
-	<form class="pure-form" action="/JavaWeb20210816/controller/calc">
+	<form method="post" class="pure-form" action="/JavaWeb20210816/controller/calc">
 		<fieldset>
 			<legend>BMI 表單輸入</legend>
 			<input type="number" placeholder="請輸入身高" name="h" /> 
