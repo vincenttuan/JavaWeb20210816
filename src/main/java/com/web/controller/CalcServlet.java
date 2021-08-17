@@ -16,23 +16,27 @@ import javax.servlet.http.HttpServletResponse;
  網頁可以得到 : 20.76 
 */
 
-@WebServlet(urlPatterns = {"/controller/calc"})
+@WebServlet(urlPatterns = { "/controller/calc" })
 public class CalcServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 解決中文編碼問題請加入此3行
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset=UTF-8");
+
 		String h = req.getParameter("h");
 		String w = req.getParameter("w");
 		PrintWriter out = resp.getWriter();
-		
+
 		// 檢查參數
-		if(h != null && w != null) {
+		if (h != null && w != null) {
 			try {
 				// 字串轉浮點數
 				double double_h = Double.parseDouble(h);
 				double double_w = Double.parseDouble(w);
-				double bmi = double_w / Math.pow(double_h/100, 2);
+				double bmi = double_w / Math.pow(double_h / 100, 2);
 				out.print(String.format("h: %.1f w: %.1f bmi: %.2f", double_h, double_w, bmi));
 			} catch (Exception e) {
 				// 轉換失敗
@@ -42,9 +46,36 @@ public class CalcServlet extends HttpServlet {
 			// 無設定參數
 			out.print("Args is null !");
 		}
-		
-		
 	}
-	
-	
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 解決中文編碼問題請加入此3行
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset=UTF-8");
+
+		String h = req.getParameter("h");
+		String w = req.getParameter("w");
+		PrintWriter out = resp.getWriter();
+
+		// 檢查參數
+		if (h != null && w != null) {
+			try {
+				// 字串轉浮點數
+				double double_h = Double.parseDouble(h);
+				double double_w = Double.parseDouble(w);
+				double bmi = double_w / Math.pow(double_h / 100, 2);
+				out.print(String.format("h: %.1f w: %.1f bmi: %.2f", double_h, double_w, bmi));
+			} catch (Exception e) {
+				// 轉換失敗
+				out.print("Arg is not numeric: " + e);
+			}
+		} else {
+			// 無設定參數
+			out.print("Args is null !");
+		}
+
+	}
+
 }
