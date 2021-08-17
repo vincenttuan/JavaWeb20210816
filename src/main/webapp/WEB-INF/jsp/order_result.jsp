@@ -13,7 +13,9 @@
 	<form class="pure-form">
 		<fieldset>
 			<legend>Order Result</legend>
-			商品名稱 : ${ p_id }
+			商品名稱 : ${ p_name }
+			<p />
+			付款方式 : 
 			<p />
 			消費金額 : ${ total }
 			<p />
