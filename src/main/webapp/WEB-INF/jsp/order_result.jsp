@@ -18,7 +18,19 @@
 			付款方式 : ${ p_payNames }
 			<p />
 			消費金額 : ${ total }
+			
+			<hr />
+			
+			商品價格 : ${ p_price }
 			<p />
+			商品數量 : ${ p_amount }
+			<p />
+			商品折扣 : ${ p_discount }
+			<p />
+			備註說明 : ${ p_memo }
+			
+			<hr />
+			
 			<button 
 				type="button" 
 				class="pure-button pure-button-primary"

@@ -44,6 +44,10 @@ public class OrderServlet extends HttpServlet {
 		req.setAttribute("p_name", p_name);
 		req.setAttribute("p_payNames", Arrays.toString(p_payNames));
 		req.setAttribute("total", total);
+		req.setAttribute("p_price", p_price);
+		req.setAttribute("p_amount", p_amount);
+		req.setAttribute("p_discount", p_discount);
+		req.setAttribute("p_memo", p_memo);
 		rd.forward(req, resp);
 		
 	}
