@@ -38,7 +38,14 @@ public class FoodSubmitController extends HttpServlet {
 			throw new ServletException("購買失敗, 商品不存在或商品庫存不足...");
 		}
 		
+		// 小記 total
+		int total = foodService.getTotal(id, qty);
+		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/lab/food/food_result.jsp");
+		req.setAttribute("foods", foodService.queryFoods()); // 庫存
+		req.setAttribute("food", foodService.getFood(id)); // 購買數量
+		req.setAttribute("qty", qty); // 購買數量
+		req.setAttribute("total", total); // 小記
 		rd.forward(req, resp);
 		
 	}
