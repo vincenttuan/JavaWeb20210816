@@ -8,7 +8,7 @@
 <title>Food Form</title>
 </head>
 <body style="padding: 15px">
-	<form class="pure-form" method="自己寫" action="自己寫">
+	<form class="pure-form" method="post" action="/JavaWeb20210816/lab/food/submit">
 		<fieldset>
 			<legend>Food Form</legend>
 			<button type="submit" class="pure-button pure-button-primary">

@@ -12,9 +12,9 @@
 		<fieldset>
 			<legend>Food Result</legend>
 			<button type="button" 
-					onclick="window.history.back();"
+					onclick="window.location.href='/JavaWeb20210816/lab/food/form';"
 					class="pure-button pure-button-primary">
-				Back
+				繼續購物
 			</button>
 		</fieldset>
 	</form>
