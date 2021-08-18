@@ -26,11 +26,14 @@
 		function drawChart() {
 	
 			var data = google.visualization.arrayToDataTable([
-					[ 'Task', 'Hours per Day' ], [ 'Work', 11 ], [ 'Eat', 2 ],
-					[ 'Commute', 2 ], [ 'Watch TV', 2 ], [ 'Sleep', 7 ] ]);
+						[ 'name', 'asset' ], 
+						<c:forEach var="food" items="${ foods }">					
+							[ '${ food.name }', ${ food.price * food.amount } ],
+						</c:forEach>
+					]);
 	
 			var options = {
-				title : 'My Daily Activities'
+				title : 'Food Asset'
 			};
 	
 			var chart = new google.visualization.PieChart(document
