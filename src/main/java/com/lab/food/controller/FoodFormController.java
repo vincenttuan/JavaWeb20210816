@@ -21,6 +21,7 @@ public class FoodFormController extends HttpServlet {
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/lab/food/food_form.jsp");
 		rd.forward(req, resp);
+		
 	}
 	
 }
