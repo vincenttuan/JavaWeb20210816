@@ -43,7 +43,7 @@ public class FoodSubmitController extends HttpServlet {
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/lab/food/food_result.jsp");
 		req.setAttribute("foods", foodService.queryFoods()); // 庫存
-		req.setAttribute("food", foodService.getFood(id)); // 購買數量
+		req.setAttribute("food", foodService.getFood(id)); // 所購買商品
 		req.setAttribute("qty", qty); // 購買數量
 		req.setAttribute("total", total); // 小記
 		rd.forward(req, resp);
