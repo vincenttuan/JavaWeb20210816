@@ -31,22 +31,38 @@
 							[ '${ food.name }', ${ food.price * food.amount } ],
 						</c:forEach>
 					]);
+			
+			var data2 = google.visualization.arrayToDataTable([
+						[ 'name', 'amount' ], 
+						<c:forEach var="food" items="${ foods }">					
+							[ '${ food.name }', ${ food.amount } ],
+						</c:forEach>
+					]);
 	
 			var options = {
 				title : 'Food Asset',
 				is3D : true
 			};
-	
+			
+			var options2 = {
+					title : 'Food Amount'
+			};
+			
+			// PieChart, BarChart, ColumnChart, LineChart
 			var chart = new google.visualization.PieChart(document
 					.getElementById('piechart'));
+			var chart2 = new google.visualization.ColumnChart(document
+					.getElementById('columnchart'));
 	
 			chart.draw(data, options);
+			chart2.draw(data2, options2);
 		}
 		
 	</script>
 </head>
 <body style="padding: 15px">
 	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	<div id="columnchart" style="width: 900px; height: 500px;"></div>
 	<p />
 	庫存數量:
 	<table class="pure-table pure-table-bordered">
