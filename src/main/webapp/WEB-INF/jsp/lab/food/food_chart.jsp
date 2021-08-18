@@ -45,7 +45,7 @@
 			};
 			
 			var options2 = {
-					title : 'Food Amount'
+				title : 'Food Amount'
 			};
 			
 			// PieChart, BarChart, ColumnChart, LineChart
