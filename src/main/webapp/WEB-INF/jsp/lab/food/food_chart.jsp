@@ -33,7 +33,8 @@
 					]);
 	
 			var options = {
-				title : 'Food Asset'
+				title : 'Food Asset',
+				is3D : true
 			};
 	
 			var chart = new google.visualization.PieChart(document
@@ -46,6 +47,27 @@
 </head>
 <body style="padding: 15px">
 	<div id="piechart" style="width: 900px; height: 500px;"></div>
-	${ foods }
+	<p />
+	庫存數量:
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="food" items="${ foods }" >
+				<tr>
+					<td>${ food.id }</td>
+					<td>${ food.name }</td>
+					<td>${ food.price }</td>
+					<td>${ food.amount }</td>
+				</tr>
+				</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>

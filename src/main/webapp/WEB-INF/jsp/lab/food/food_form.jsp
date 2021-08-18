@@ -60,6 +60,10 @@
 				Submit</button>
 			<button type="reset" class="pure-button pure-button-primary">
 				Reset</button>
+			<button type="button"
+					onclick="window.location.href='/JavaWeb20210816/lab/food/chart'" 
+					class="pure-button pure-button-primary">
+				Chart</button>	
 		</fieldset>
 	</form>
 </body>
