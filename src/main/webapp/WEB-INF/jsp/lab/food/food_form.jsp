@@ -24,6 +24,7 @@
 			</select>
 			<p />
 			購買數量:
+			<input name="food_qty" type="number" placeholder="請輸入購買數量" value="0" />
 			<p />
 			<!-- 
 			${ foods }
