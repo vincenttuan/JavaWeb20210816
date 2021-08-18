@@ -14,4 +14,20 @@ public class FoodService {
 		return foodDao.findAll();
 	}
 	
+	// 扣抵庫存
+	public boolean updateAmountById(Integer id, Integer qty) {
+		// 根據 id 找到 food 物件
+		Food food = foodDao.getFoodById(id);
+		if(food == null) {
+			return false;
+		} else {
+			if(food.getAmount() >= qty) { // 庫存數量 >= 購買數量
+				foodDao.updateAmount(id, qty);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
 }

@@ -19,7 +19,9 @@
 			選擇商品:
 			<select name="food_id">
 				<c:forEach var="food" items="${ foods }">
-					<option value="${ food.id }">${ food.name } 剩餘: ${ food.amount }</option>
+					<option value="${ food.id }">
+						${ food.name } 剩餘: ${ food.amount }
+					</option>
 				</c:forEach>
 			</select>
 			<p />
