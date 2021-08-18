@@ -48,9 +48,10 @@ public class Food {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Food [id=" + id + ", name=" + name + ", price=" + price + ", amount=" + amount + "]";
+	}
 	
 }
