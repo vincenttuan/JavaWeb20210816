@@ -19,7 +19,7 @@
 	<script type="text/javascript">
 	
 		google.charts.load('current', {
-			'packages' : [ 'corechart' ]
+			'packages' : [ 'corechart', 'table' ]
 		});
 		google.charts.setOnLoadCallback(drawChart);
 	
@@ -44,6 +44,24 @@
 							[ '${ food.name }', ${ food.price } ],
 						</c:forEach>
 					]);
+			
+			var data4 = new google.visualization.DataTable();
+				data4.addColumn('number', 'Id');
+	        	data4.addColumn('string', 'Name');
+		        data4.addColumn('number', 'Price');
+		        data4.addColumn('number', 'Amount');
+		        data4.addColumn('number', 'Subtotal');
+		        data4.addRows([
+		        	<c:forEach var="food" items="${ foods }">	
+		          		[ 
+		          			${ food.id }, 
+		          			'${ food.name }',  
+		          			{v: ${ food.price }, f: '$${ food.price }'}, 
+		          			${ food.amount }, 
+		          			{v: ${ food.price*food.amount }, f: '$${ food.price*food.amount }'}
+		          		],
+		          	</c:forEach>
+		        ]);
 	
 			var options = {
 				title : 'Food Asset',
@@ -58,6 +76,12 @@
 				title : 'Food Price'
 			};
 			
+			var options4 = {
+				showRowNumber: true, 
+				width: '100%', 
+				height: '100%'
+			};
+			
 			// PieChart, BarChart, ColumnChart, LineChart
 			var chart = new google.visualization.PieChart(document
 					.getElementById('piechart'));
@@ -65,10 +89,12 @@
 					.getElementById('columnchart'));
 			var chart3 = new google.visualization.LineChart(document
 					.getElementById('linechart'));
-	
+			var chart4 = new google.visualization.Table(document.getElementById('table_div'));
+	        
 			chart.draw(data, options);
 			chart2.draw(data2, options2);
 			chart3.draw(data3, options3);
+			chart4.draw(data4, options4);
 		}
 		
 	</script>
@@ -77,6 +103,7 @@
 	<div id="piechart" style="width: 900px; height: 500px;"></div>
 	<div id="columnchart" style="width: 900px; height: 500px;"></div>
 	<div id="linechart" style="width: 900px; height: 500px;"></div>
+	<div id="table_div" style="width: 900px; height: 200px;"></div>
 	<p />
 	庫存數量:
 	<table class="pure-table pure-table-bordered">
