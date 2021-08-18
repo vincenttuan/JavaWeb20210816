@@ -1,12 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+<title>Food Form</title>
 </head>
-<body>
-
+<body style="padding: 15px">
+	<form class="pure-form" method="自己寫" action="自己寫">
+		<fieldset>
+			<legend>Food Form</legend>
+			<button type="submit" class="pure-button pure-button-primary">
+				Submit
+			</button>
+			<button type="reset" class="pure-button pure-button-primary">
+				Reset
+			</button>
+		</fieldset>
+	</form>
 </body>
 </html>
