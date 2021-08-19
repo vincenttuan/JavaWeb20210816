@@ -36,6 +36,8 @@ public class SessionServlet extends HttpServlet {
 
 		// ­«¾Éºô­¶
 		RequestDispatcher rd = req.getRequestDispatcher("/form/session_form.jsp");
+		req.setAttribute("session_id", session.getId());
+		req.setAttribute("session_amount_list", session.getAttribute("amount_list"));
 		rd.forward(req, resp);
 
 	}

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	session="false" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +27,12 @@
 		<p />
 		<fieldset>
 			<legend>Session result (記帳紀錄)</legend>
+			<!-- 
 			Session id : ${ pageContext.session.id } <p />
 			${ sessionScope['amount_list'] }
+			-->
+			Session id : ${ session_id } <p />
+			${ session_amount_list }
 			<p />
 		</fieldset>
 	</form>
