@@ -12,7 +12,7 @@
 
 	<form method="post" class="pure-form" action="/JavaWeb20210816/controller/session">
 		<fieldset>
-			<legend>Session form (記帳輸入)</legend>
+			<legend>Session form (記帳輸入) - 服務數量: ${ applicationScope['count'] }</legend>
 			<input type="number" placeholder="請輸入金額" name="amount" /> 
 			<p />
 			<button type="submit" class="pure-button pure-button-primary">
