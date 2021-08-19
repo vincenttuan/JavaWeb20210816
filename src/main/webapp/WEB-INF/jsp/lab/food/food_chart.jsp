@@ -61,6 +61,7 @@
 		          			{v: ${ food.price*food.amount }, f: '$${ food.price*food.amount }'}
 		          		],
 		          	</c:forEach>
+		          		
 		        ]);
 	
 			var options = {
