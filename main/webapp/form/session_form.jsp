@@ -18,6 +18,11 @@
 			<button type="submit" class="pure-button pure-button-primary">
 				submit
 			</button>
+			<button type="button"
+					onclick="window.location.href='/JavaWeb20210816/controller/session_clear';" 
+					class="pure-button pure-button-primary">
+				clear
+			</button>
 		</fieldset>
 		<p />
 		<fieldset>
