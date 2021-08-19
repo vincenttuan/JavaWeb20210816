@@ -19,7 +19,7 @@ public class CookieServlet extends HttpServlet {
 		String amount = req.getParameter("amount");
 		// 設定 cookie 資料
 		Cookie cookie = new Cookie("amount", amount);
-		cookie.setMaxAge(60);
+		cookie.setMaxAge(60); // 60秒
 		// 傳送 cookie 資料給瀏覽器寫入到 client 的電腦中
 		//cookie = new Cookie("amount", "100");
 		resp.addCookie(cookie);
