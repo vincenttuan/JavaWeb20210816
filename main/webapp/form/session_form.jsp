@@ -27,6 +27,7 @@
 		<p />
 		<fieldset>
 			<legend>Session result (記帳紀錄)</legend>
+			Session id : ${ pageContext.session.id } <p />
 			${ sessionScope['amount_list'] }
 			<p />
 		</fieldset>

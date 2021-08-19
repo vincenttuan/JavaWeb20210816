@@ -12,6 +12,7 @@ public class HttpSessionHaker {
 		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 		// ¶ë¤J¤@­Ó header
 		connection.setRequestProperty("cookie", "JSESSIONID=71FDF203EA5556A3C97F17F46D90BB9B");
+		connection.setRequestProperty("User-Agent", "Mozilla");
 		connection.connect();
 		InputStream is = connection.getInputStream();
 		System.out.println(IOUtils.toString(is,"utf-8"));
