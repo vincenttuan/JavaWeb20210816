@@ -11,7 +11,7 @@
 <body style="padding: 15px">
 	<table>
 		<tr>
-			<td valign="top">
+			<td valign="top" style="padding: 10px">
 				<form class="pure-form">
 					<fieldset>
 						<legend>User form</legend>
@@ -35,13 +35,16 @@
 					</fieldset>
 				</form>
 			</td>
-			<td valign="top">
+			<td valign="top" style="padding: 10px">
 				<form class="pure-form">
 					<fieldset>
 						<legend>
 							User list 
-							<button type="button" class="pure-button pure-button-primary" style="float: right">查詢</button>
+							
 						</legend>
+						<button type="button" class="pure-button pure-button-primary" style="float: right;margin-left: 5px">查詢</button>
+						<input type="text" name="u_username" placeholder="請輸入名字關鍵字" style="float: right;">
+						<p />
 						<table class="pure-table pure-table-bordered">
 							<thead>
 								<tr>
