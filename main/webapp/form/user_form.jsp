@@ -14,7 +14,7 @@
 			<td valign="top" style="padding: 10px">
 				<form class="pure-form">
 					<fieldset>
-						<legend>User form</legend>
+						<legend><img src="../image/man.png" width="40">&nbsp;&nbsp;&nbsp;&nbsp;User form</legend>
 						序號: <input type="number" placeholder="id" />
 						<p />
 						名稱: <input type="text" placeholder="username" />
@@ -38,10 +38,7 @@
 			<td valign="top" style="padding: 10px">
 				<form class="pure-form">
 					<fieldset>
-						<legend>
-							User list 
-							
-						</legend>
+						<legend><img src="../image/team.png" width="40">&nbsp;&nbsp;&nbsp;&nbsp;User list</legend>
 						<button type="button" class="pure-button pure-button-primary" style="float: right;margin-left: 5px">查詢</button>
 						<input type="text" name="u_username" placeholder="請輸入名字關鍵字" style="float: right;">
 						<p />
@@ -49,28 +46,31 @@
 							<thead>
 								<tr>
 									<th>id</th>
+									<th>image</th>
+									<th>priority</th>
 									<th>usernmae</th>
 									<th>password(encode)</th>
 									<th>password(decode)</th>
-									<th>priority</th>
 									<th>createtime</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>1</td>
+									<td><img src="../image/man.png" width="30"></td>
+									<td>0</td>
 									<td>Honda</td>
 									<td>MTIzNA==</td>
 									<td>1234</td>
-									<td>0</td>
 									<td>2021/08/20</td>
 								</tr>
 								<tr>
 									<td>2</td>
+									<td><img src="../image/programmer.png" width="30"></td>
+									<td>1</td>
 									<td>Mary</td>
 									<td>NTY3OA==</td>
 									<td>5678</td>
-									<td>1</td>
 									<td>2021/08/20</td>
 								</tr>
 							</tbody>
