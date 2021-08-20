@@ -12,7 +12,7 @@ import java.util.List;
 import org.simpleflatmapper.jdbc.JdbcMapper;
 import org.simpleflatmapper.jdbc.JdbcMapperFactory;
 
-public class ReadUser3 {
+public class ReadUser4 {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		
@@ -20,9 +20,9 @@ public class ReadUser3 {
 		String jdbcUrl = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC&characterEncoding=utf-8&useUnicode=true";
 		String username = "root";
 		String password = "12345678";
-		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user";
+		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user where u_id=2";
 		
-		List<User> users = new ArrayList<>();
+		User user = null;
 		
 		try(Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
 			Statement stmt = conn.createStatement();
@@ -31,9 +31,9 @@ public class ReadUser3 {
 			System.out.println("連線是否已關閉: " + conn.isClosed());
 			
 			// 利用 simpleflatmapper 進行 OR-Mapping
-			// 多筆資料
-			JdbcMapper<User[]> mapper = JdbcMapperFactory.newInstance().newMapper(User[].class);
-			mapper.stream(rs).forEach(user_array -> users.addAll(Arrays.asList(user_array)));
+			// 單筆資料
+			JdbcMapper<User> mapper = JdbcMapperFactory.newInstance().newMapper(User.class);
+			user = mapper.iterator(rs).next();
 			
 		} catch (Exception e) {
 			
@@ -41,9 +41,8 @@ public class ReadUser3 {
 			
 		}
 		
-		// 使用 users
-		System.out.println(users.size());
-		System.out.println(users);
+		// 使用 user
+		System.out.println(user);
 		
 	}
 
