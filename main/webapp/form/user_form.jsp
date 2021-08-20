@@ -40,7 +40,7 @@
 					<fieldset>
 						<legend><img src="../image/team.png" width="40">&nbsp;&nbsp;&nbsp;&nbsp;User list</legend>
 						<button type="button" class="pure-button pure-button-primary" style="float: right;margin-left: 5px">查詢</button>
-						<input type="text" name="u_username" placeholder="請輸入名字關鍵字" style="float: right;">
+						<input type="text" name="u_username" placeholder="請輸入名字關鍵字" style="float: right;background-image:url('../image/search.png');background-repeat:no-repeat;background-position:right;">
 						<p />
 						<table class="pure-table pure-table-bordered">
 							<thead>
