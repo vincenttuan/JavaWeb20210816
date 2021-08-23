@@ -2,6 +2,7 @@ package com.lab.user.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -27,13 +28,15 @@ public class UserDao {
 	
 	public List<User> queryAll(String u_username_keyword) throws Exception {
 		// 查詢資料表
-		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user";
-		if(u_username_keyword != null && u_username_keyword.trim().length() > 0) {
-			sql = "select u_id, u_username, u_password, u_priority, u_createtime from user " +
-				  "where u_username like '%" + u_username_keyword + "%'";
-		}
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(sql); 
+		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user " +
+				     "where u_username like ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		if(u_username_keyword == null) {
+			u_username_keyword = "";
+		} 
+		u_username_keyword = "%" + u_username_keyword.trim() + "%";
+		pstmt.setString(1, u_username_keyword);
+		ResultSet rs = pstmt.executeQuery(); 
 		
 		// OR-Mapping 到 users 集合
 		List<User> users = new ArrayList<>();
@@ -42,7 +45,7 @@ public class UserDao {
 		
 		// 關閉物件
 		rs.close();
-		stmt.close();
+		pstmt.close();
 		
 		return users;
 	}
