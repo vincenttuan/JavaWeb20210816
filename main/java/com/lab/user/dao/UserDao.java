@@ -26,6 +26,55 @@ public class UserDao {
 		}
 	}
 	
+	// create
+	public int create(User user) throws Exception {
+		String sql = "Insert into user(u_username, u_password, u_priority) values(?, ?, ?)";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, user.getU_username());
+			pstmt.setString(2, user.getU_password());
+			pstmt.setInt(3, user.getU_priority());
+			return pstmt.executeUpdate();
+		}
+	}
+	
+	// update
+	public int update(User user) throws Exception {
+		String sql = "Update user set u_username=?, u_password=?, u_priority=? where u_id=?";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, user.getU_username());
+			pstmt.setString(2, user.getU_password());
+			pstmt.setInt(3, user.getU_priority());
+			pstmt.setInt(4, user.getU_id());
+			return pstmt.executeUpdate();
+		}
+	}
+	
+	// delete
+	public int delete(Integer u_id) throws Exception {
+		String sql = "Delete from user where u_id = ?";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, u_id);
+			return pstmt.executeUpdate();
+		}
+	}
+	
+	// get
+	public User get(Integer u_id) throws Exception {
+		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user " +
+					 "where u_id = ?";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();) {
+			if(rs.next()) {
+				JdbcMapper<User> mapper = JdbcMapperFactory.newInstance().newMapper(User.class);
+				return mapper.stream(rs).findAny().get();
+			}
+			return null;
+		}
+		
+	}
+	
+	
+	// query
 	public List<User> queryAll(String u_username_keyword) throws Exception {
 		// 查詢資料表
 		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user " +
