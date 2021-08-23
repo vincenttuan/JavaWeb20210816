@@ -13,9 +13,23 @@
 	<meta charset="UTF-8">
 	<title>User Form</title>
 	<script>
+		// 若此瀏覽器不支援 javascript trim() 方法, 則用以下的 trim() 方法替代
+		if (!String.prototype.trim) {
+		  String.prototype.trim = function () {
+		    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+		  };
+		}
+	
 		function createAndUpdateConfirm() {
+			// 先將 u_username 與 u_password 內容中的左右空白清除
+			document.getElementById('u_username').value = document.getElementById('u_username').value.trim();
+			document.getElementById('u_password').value = document.getElementById('u_password').value.trim();
+			
+			// 取得 trim() 之後的 u_username 與 u_password 內容
 			var username = document.getElementById('u_username').value;
 			var password = document.getElementById('u_password').value;
+			
+			// 驗證 u_username 與 u_password 內容 
 			if(username == '') {
 				alert('請輸入使用者名稱?')
 				return false;
