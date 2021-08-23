@@ -13,6 +13,20 @@
 	<meta charset="UTF-8">
 	<title>User Form</title>
 	<script>
+		function createAndUpdateConfirm() {
+			var username = document.getElementById('u_username').value;
+			var password = document.getElementById('u_password').value;
+			if(username == '') {
+				alert('請輸入使用者名稱?')
+				return false;
+			}
+			if(password == '') {
+				alert('請輸入使用者密碼?')
+				return false;
+			}
+			return true;
+		}
+	
 		function delete_confirm(u_id) {
 			var yes = confirm('是否要刪除 u_id = ' + u_id + ' 這筆資料?');
 			if(yes) {
@@ -26,19 +40,22 @@
 	<table>
 		<tr>
 			<td valign="top" style="padding: 10px">
-				<form class="pure-form" method="post" action="/JavaWeb20210816/lab/user/update">
+				<form id="user_form" class="pure-form" 
+				      method="post"
+				      onsubmit="return createAndUpdateConfirm()" 
+				      action="/JavaWeb20210816/lab/user/update">
 					<fieldset>
 						<legend>
 							<img src="/JavaWeb20210816/image/man.png" width="40">&nbsp;&nbsp;&nbsp;&nbsp;User
 							form
 						</legend>
-						序號: <input type="number" name="u_id" readonly value="${ user.u_id }" />
+						序號: <input type="number" id="u_id" name="u_id" readonly value="${ user.u_id }" />
 						<p />
-						名稱: <input type="text" placeholder="請輸入帳號" name="u_username" value="${ user.u_username }" />
+						名稱: <input type="text" placeholder="請輸入帳號" id="u_username" name="u_username" value="${ user.u_username }" />
 						<p />
-						密碼: <input type="text" placeholder="請輸入密碼" name="u_password" value="${ myel:decode(user.u_password) }" />
+						密碼: <input type="text" placeholder="請輸入密碼" id="u_password" name="u_password" value="${ myel:decode(user.u_password) }" />
 						<p />
-						權限: <select name="u_priority">
+						權限: <select id="u_priority" name="u_priority">
 							<option value="0" ${ user.u_priority == 0 ? 'selected' : '' } >一般</option>
 							<option value="1" ${ user.u_priority == 1 ? 'selected' : '' }>管理</option>
 						</select>
