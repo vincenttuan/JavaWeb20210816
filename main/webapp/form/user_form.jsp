@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="/tlds/mytld" prefix="myel" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +78,7 @@
 								<td>${ user.u_priority }</td>
 								<td>${ user.u_username }</td>
 								<td>${ user.u_password }</td>
-								<td></td>
+								<td>${ myel:decode(user.u_password) }</td>
 								<td>${ user.u_createtime }</td>
 							</tr>
 						</c:forEach>
