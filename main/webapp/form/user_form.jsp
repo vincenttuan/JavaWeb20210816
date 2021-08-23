@@ -25,6 +25,10 @@
 			document.getElementById('u_username').value = document.getElementById('u_username').value.trim();
 			document.getElementById('u_password').value = document.getElementById('u_password').value.trim();
 			
+			// 將中間空白去除
+			document.getElementById('u_username').value = document.getElementById('u_username').value.split(' ').join('');
+			document.getElementById('u_password').value = document.getElementById('u_password').value.split(' ').join('');
+			
 			// 取得 trim() 之後的 u_username 與 u_password 內容
 			var username = document.getElementById('u_username').value;
 			var password = document.getElementById('u_password').value;
