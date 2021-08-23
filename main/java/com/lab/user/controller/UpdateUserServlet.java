@@ -19,6 +19,8 @@ public class UpdateUserServlet extends HttpServlet {
 	private UserDao userDao = new UserDao();
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");
 		// 資料接收
 		String u_id = req.getParameter("u_id");
 		String u_username = req.getParameter("u_username");

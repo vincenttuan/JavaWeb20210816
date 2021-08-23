@@ -18,6 +18,8 @@ public class GetUserServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("utf-8");
 		try {
 			int u_id = Integer.parseInt(req.getParameter("u_id"));
 			User user = userDao.get(u_id);
