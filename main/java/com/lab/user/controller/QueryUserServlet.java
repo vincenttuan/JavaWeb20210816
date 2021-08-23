@@ -18,10 +18,10 @@ public class QueryUserServlet extends HttpServlet {
 	private UserDao userDao = new UserDao();
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		String u_username_keyword = req.getParameter("u_username_keyword");
 		List<User> users = null;
 		try {
-			users = userDao.queryAll();
+			users = userDao.queryAll(u_username_keyword);
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
 		}

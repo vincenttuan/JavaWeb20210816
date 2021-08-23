@@ -25,9 +25,13 @@ public class UserDao {
 		}
 	}
 	
-	public List<User> queryAll() throws Exception {
+	public List<User> queryAll(String u_username_keyword) throws Exception {
 		// 查詢資料表
 		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user";
+		if(u_username_keyword != null && u_username_keyword.trim().length() > 0) {
+			sql = "select u_id, u_username, u_password, u_priority, u_createtime from user " +
+				  "where u_username like '%" + u_username_keyword + "%'";
+		}
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(sql); 
 		
