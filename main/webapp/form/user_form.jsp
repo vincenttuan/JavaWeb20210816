@@ -8,10 +8,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
-<meta charset="UTF-8">
-<title>User Form</title>
+	<link rel="stylesheet"
+		href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+	<meta charset="UTF-8">
+	<title>User Form</title>
+	<script>
+		function delete_confirm(u_id) {
+			var yes = confirm('是否要刪除 u_id = ' + u_id + ' 這筆資料?');
+			if(yes) {
+				window.location.href='/JavaWeb20210816/lab/user/delete?u_id=' + u_id;
+			}
+		}
+	</script>
+	
 </head>
 <body style="padding: 15px">
 	<table>
@@ -90,7 +99,7 @@
 								</td>
 								<td>
 									<button type="button"
-											onclick="window.location.href='/JavaWeb20210816/lab/user/delete?u_id=${ user.u_id }';"
+											onclick="delete_confirm(${ user.u_id })"
 											class="pure-button pure-button-primary">
 										Delete
 									</button>
