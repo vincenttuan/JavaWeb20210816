@@ -64,12 +64,13 @@ public class UserDao {
 					 "where u_id = ?";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, u_id);
-			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
-				JdbcMapper<User> mapper = JdbcMapperFactory.newInstance().newMapper(User.class);
-				return mapper.stream(rs).findAny().get();
+			try(ResultSet rs = pstmt.executeQuery();) {
+				if(rs.next()) {
+					JdbcMapper<User> mapper = JdbcMapperFactory.newInstance().newMapper(User.class);
+					return mapper.stream(rs).findAny().get();
+				}
+				return null;
 			}
-			return null;
 		}
 		
 	}
