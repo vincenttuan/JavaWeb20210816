@@ -21,7 +21,7 @@
 							<img src="/JavaWeb20210816/image/man.png" width="40">&nbsp;&nbsp;&nbsp;&nbsp;User
 							form
 						</legend>
-						序號: <input type="number" placeholder="請輸入 ID" name="u_id" readonly/>
+						序號: <input type="number" name="u_id" readonly/>
 						<p />
 						名稱: <input type="text" placeholder="請輸入帳號" name="u_username" />
 						<p />
