@@ -21,17 +21,16 @@
 		}
 	
 		function createAndUpdateConfirm() {
-			// 先將 u_username 與 u_password 內容中的左右空白清除
-			document.getElementById('u_username').value = document.getElementById('u_username').value.trim();
-			document.getElementById('u_password').value = document.getElementById('u_password').value.trim();
+			var username_field = document.getElementById('u_username'); // u_username 表單欄位物件
+			var password_field = document.getElementById('u_password'); // u_password 表單欄位物件
 			
-			// 將中間空白去除
-			document.getElementById('u_username').value = document.getElementById('u_username').value.split(' ').join('');
-			document.getElementById('u_password').value = document.getElementById('u_password').value.split(' ').join('');
+			// 先將 u_username 與 u_password 內容中的左右空白清除也將中間空白去除
+			username_field.value = username_field.value.trim().split(' ').join('');
+			password_field.value = password_field.value.trim().split(' ').join('');
 			
 			// 取得 trim() 之後的 u_username 與 u_password 內容
-			var username = document.getElementById('u_username').value;
-			var password = document.getElementById('u_password').value;
+			var username = username_field.value;
+			var password = password_field.value;
 			
 			// 驗證 u_username 與 u_password 內容 
 			if(username == '') {
