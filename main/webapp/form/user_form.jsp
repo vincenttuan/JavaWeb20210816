@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/tlds/mytld" prefix="myel" %>
+<%@ taglib prefix="c"    uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"   uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="myel" uri="/tlds/mytld" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,15 +23,15 @@
 							<img src="/JavaWeb20210816/image/man.png" width="40">&nbsp;&nbsp;&nbsp;&nbsp;User
 							form
 						</legend>
-						序號: <input type="number" name="u_id" readonly/>
+						序號: <input type="number" name="u_id" readonly value="${ user.u_id }" />
 						<p />
-						名稱: <input type="text" placeholder="請輸入帳號" name="u_username" />
+						名稱: <input type="text" placeholder="請輸入帳號" name="u_username" value="${ user.u_username }" />
 						<p />
-						密碼: <input type="password" placeholder="請輸入密碼" name="u_password" />
+						密碼: <input type="text" placeholder="請輸入密碼" name="u_password" value="${ myel:decode(user.u_password) }" />
 						<p />
 						權限: <select name="u_priority">
-							<option value="0">一般</option>
-							<option value="1">管理</option>
+							<option value="0" ${ user.u_priority == 0 ? 'selected' : '' } >一般</option>
+							<option value="1" ${ user.u_priority == 1 ? 'selected' : '' }>管理</option>
 						</select>
 						<p />
 						<button type="submit" class="pure-button pure-button-primary">新增</button>
@@ -66,6 +66,8 @@
 							<th>password(encode)</th>
 							<th>password(decode)</th>
 							<th>createtime</th>
+							<th>update</th>
+							<th>delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -80,6 +82,20 @@
 								<td>${ user.u_password }</td>
 								<td>${ myel:decode(user.u_password) }</td>
 								<td>${ user.u_createtime }</td>
+								<td>
+									<button type="button"
+											onclick="window.location.href='/JavaWeb20210816/lab/user/get?u_id=${ user.u_id }';" 
+											class="pure-button pure-button-primary">
+										Update
+									</button>
+								</td>
+								<td>
+									<button type="button"
+											onclick="window.location.href='/JavaWeb20210816/lab/user/delete?u_id=${ user.u_id }';"
+											class="pure-button pure-button-primary">
+										Delete
+									</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
