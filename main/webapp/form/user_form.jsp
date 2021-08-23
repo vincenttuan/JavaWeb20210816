@@ -34,8 +34,7 @@
 							<option value="1" ${ user.u_priority == 1 ? 'selected' : '' }>管理</option>
 						</select>
 						<p />
-						<button type="submit" class="pure-button pure-button-primary">新增</button>
-						<button type="submit" class="pure-button pure-button-primary">修改</button>
+						<button type="submit" class="pure-button pure-button-primary">${ user == null ? '新增' : '修改' }</button>
 						<p />
 					</fieldset>
 				</form>
