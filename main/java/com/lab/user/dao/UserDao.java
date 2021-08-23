@@ -62,8 +62,9 @@ public class UserDao {
 	public User get(Integer u_id) throws Exception {
 		String sql = "select u_id, u_username, u_password, u_priority, u_createtime from user " +
 					 "where u_id = ?";
-		try(PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();) {
+		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setInt(1, u_id);
+			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				JdbcMapper<User> mapper = JdbcMapperFactory.newInstance().newMapper(User.class);
 				return mapper.stream(rs).findAny().get();
