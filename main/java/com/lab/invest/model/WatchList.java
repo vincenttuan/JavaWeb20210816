@@ -3,10 +3,15 @@ package com.lab.invest.model;
 import java.util.Date;
 
 public class WatchList {
+	// 欄位資料
 	private Integer id;
 	private Integer investid; // investor's id
 	private Integer stockpoolid;
 	private Date tdate;
+	
+	// one to one 關聯
+	private Investor investor;
+	private StockPool stockPool;
 	
 	public WatchList() {
 		
@@ -49,6 +54,22 @@ public class WatchList {
 
 	public void setTdate(Date tdate) {
 		this.tdate = tdate;
+	}
+	
+	public Investor getInvestor() {
+		return investor;
+	}
+
+	public void setInvestor(Investor investor) {
+		this.investor = investor;
+	}
+
+	public StockPool getStockPool() {
+		return stockPool;
+	}
+
+	public void setStockPool(StockPool stockPool) {
+		this.stockPool = stockPool;
 	}
 
 	@Override
