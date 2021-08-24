@@ -1,6 +1,7 @@
 package com.lab.invest.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -30,4 +31,24 @@ public class InvestorDao {
 		}
 		return investors;
 	}
+	
+	public Investor get(Integer id) {
+		String sql = "select id, username, email, tdate from investor where id=?";
+		Investor investor = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			// OR-Mapping
+			JdbcMapper<Investor> mapper = JdbcMapperFactory.newInstance().newMapper(Investor.class);
+			investor = mapper.stream(rs).findFirst().get();
+			
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return investor;
+	}
+	
 }
