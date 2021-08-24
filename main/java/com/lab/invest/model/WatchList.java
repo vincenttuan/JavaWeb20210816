@@ -6,17 +6,17 @@ public class WatchList {
 	private Integer id;
 	private Integer investid; // investor's id
 	private Integer stockpoolid;
-	private Date date;
+	private Date tdate;
 	
 	public WatchList() {
 		
 	}
 	
-	public WatchList(Integer id, Integer investid, Integer stockpoolid, Date date) {
+	public WatchList(Integer id, Integer investid, Integer stockpoolid, Date tdate) {
 		this.id = id;
 		this.investid = investid;
 		this.stockpoolid = stockpoolid;
-		this.date = date;
+		this.tdate = tdate;
 	}
 
 	public Integer getId() {
@@ -43,17 +43,17 @@ public class WatchList {
 		this.stockpoolid = stockpoolid;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getTdate() {
+		return tdate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setTdate(Date tdate) {
+		this.tdate = tdate;
 	}
 
 	@Override
 	public String toString() {
-		return "WatchList [id=" + id + ", investid=" + investid + ", stockpoolid=" + stockpoolid + ", date=" + date
+		return "WatchList [id=" + id + ", investid=" + investid + ", stockpoolid=" + stockpoolid + ", tdate=" + tdate
 				+ "]";
 	}
 	

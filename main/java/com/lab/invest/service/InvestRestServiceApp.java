@@ -15,6 +15,7 @@ public class InvestRestServiceApp extends Application {
 		Set<Class<?>> classes = new LinkedHashSet<>();
 		classes.add(InvestorService.class);
 		classes.add(StockPoolService.class);
+		classes.add(WatchListService.class);
 		return classes;
 	}
 
