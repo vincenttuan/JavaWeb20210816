@@ -16,6 +16,7 @@ public class InvestRestServiceApp extends Application {
 		classes.add(InvestorService.class);
 		classes.add(StockPoolService.class);
 		classes.add(WatchListService.class);
+		classes.add(TransactionLogService.class);
 		return classes;
 	}
 

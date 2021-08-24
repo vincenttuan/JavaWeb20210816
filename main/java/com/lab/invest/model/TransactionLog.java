@@ -11,6 +11,10 @@ public class TransactionLog {
 	private Integer amount;
 	private Date tdate;
 	
+	// one to one ÃöÁp
+	private Investor investor;
+	private StockPool stockPool;
+		
 	public TransactionLog() {
 		
 	}
@@ -80,6 +84,22 @@ public class TransactionLog {
 
 	public void setTdate(Date tdate) {
 		this.tdate = tdate;
+	}
+	
+	public Investor getInvestor() {
+		return investor;
+	}
+
+	public void setInvestor(Investor investor) {
+		this.investor = investor;
+	}
+
+	public StockPool getStockPool() {
+		return stockPool;
+	}
+
+	public void setStockPool(StockPool stockPool) {
+		this.stockPool = stockPool;
 	}
 
 	@Override
