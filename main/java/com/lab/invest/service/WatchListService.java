@@ -24,7 +24,13 @@ public class WatchListService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<WatchList> queryAll() {
-		return watchListDao.queryAll();
+		// ÃöÁp°t¸m
+		List<WatchList> watchLists = watchListDao.queryAll();
+		for(WatchList watchList : watchLists) {
+			watchList.setInvestor(investorDao.get(watchList.getInvestid()));
+			watchList.setStockPool(stockPoolDao.get(watchList.getStockpoolid()));
+		}
+		return watchLists;
 	}
 	
 	@Path("/{id}")
