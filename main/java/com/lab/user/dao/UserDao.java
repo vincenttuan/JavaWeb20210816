@@ -65,7 +65,6 @@ public class UserDao {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setInt(1, u_id);
 			try(ResultSet rs = pstmt.executeQuery();) {
-				List<User> users = new ArrayList<>();
 				JdbcMapper<User> mapper = JdbcMapperFactory.newInstance().newMapper(User.class);
 				return mapper.stream(rs).findFirst().get();
 			}
