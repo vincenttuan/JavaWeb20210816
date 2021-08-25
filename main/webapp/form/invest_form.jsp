@@ -39,11 +39,20 @@
 							String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate)		
 						);
 					});
+					//-- 我的 Watch List ----------------------------
+					$('#myWatchTable tbody > tr').remove(); // 先將畫面暫存資料清除
+					$.each(datas.watchLists, function(i, item) { 
+						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td><td>{9}</td></tr>';
+						$('#myWatchTable').append(
+							String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
+									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.volume, item.realTimeStock.transdate)		
+						);
+					});
 					
 				});
 			}
 			
-			getInvestorData(1);
+			getInvestorData(3);
 		});
 	</script>
 </head>
@@ -62,6 +71,30 @@
 	            <th>amount</th>
 	            <th>price</th>
 	            <th>tdate</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    			       
+	    </tbody>
+	</table>
+	
+	<p />
+	我的 Watch List
+	<p />
+	<table id="myWatchTable" class="pure-table pure-table-bordered">
+	    <thead>
+	        <tr>
+	            <th>id</th>
+	            <th>typeid</th>
+	            <th>symbol</th>
+	            <th>symbolname</th>
+	            <th>warning</th>
+	            <!-- 即時盤中資訊  -->
+	            <th>bid</th>
+	            <th>ask</th>
+	            <th>lastprice</th>
+	            <th>volume</th>
+	            <th>transdate</th>
 	        </tr>
 	    </thead>
 	    <tbody>
