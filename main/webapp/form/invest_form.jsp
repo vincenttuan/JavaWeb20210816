@@ -111,7 +111,7 @@
 				$.each(datas.watchLists, function(i, item) { 
 					var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td style="color:{12}" align="right">{5}</td><td style="color:{12}" align="right">{6}</td><td style="color:{12}" align="right">{7}</td><td style="color:{12}" align="right">{8}</td><td style="color:{12}" align="right">{9}</td><td align="right">{10}</td><td nowrap>{11}</td><td nowrap>{13}</td><td nowrap>{14}</td></tr>';
 					$('#myWatchTable').append(
-						String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
+						String.format(html, item.id, item.stockPool.typeid, '<span title="按我一下可以看K線圖" style="cursor:pointer" onclick="queryHistQuotes(\'' + item.stockPool.symbol + '\')">' + item.stockPool.symbol + '</span>', item.stockPool.symbolname, item.stockPool.warning, 
 								            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, numberFormat(item.realTimeStock.volume), item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100',
 								            '<input type="button" value="買" onclick="buySell(1, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />', '<input type="button" value="賣" onclick="buySell(2, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />')		
 					);
