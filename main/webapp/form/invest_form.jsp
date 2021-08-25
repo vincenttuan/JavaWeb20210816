@@ -15,6 +15,8 @@
 				$.get(url, function(datas, status) { // datas : 回傳的 json 資料, status : 連線狀態
 					console.log(status);
 					console.log(datas);
+					$('#username').text(datas.username);
+					$('#email').text(datas.email);
 				});
 			}
 			
@@ -22,7 +24,12 @@
 		});
 	</script>
 </head>
-<body>
+<body style="padding: 15px">
+	Hello <span id="username"></span> <span id="email"></span> 
+	<p />
+	
+	
+	<hr />
 	<ol>
 		<li><a href="/JavaWeb20210816/rest/investor/">/JavaWeb20210816/rest/investor/</a></li>
 		<li><a href="/JavaWeb20210816/rest/investor/1">/JavaWeb20210816/rest/investor/1</a></li>
