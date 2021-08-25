@@ -48,6 +48,27 @@
 	    			break;
 	    	}
 	    	
+	    	var obj = new Object();
+	    	obj.investid = 1;
+	    	obj.stockpoolid = 4;
+	    	obj.bs = 'B';
+	    	obj.price = 100.5;
+	    	obj.amount = 3000;
+	    	var jsonStr = JSON.stringify(obj);
+	    	
+	    	$.ajax({
+	    		url: '/JavaWeb20210816/rest/transactionlog/',
+	    		type: 'POST',
+	    		contentType: 'application/json; charset=utf-8',
+	    		data: jsonStr,
+	    		async: true,
+	    		cache: false,
+	    		processData: false,
+	    		success: function(result) {  // server 回傳的結果
+	    			console.log(result);
+	    		}
+	    	});
+	    	
 	    }
 	    
 	    // JQuery 程式進入點
