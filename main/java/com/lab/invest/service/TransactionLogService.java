@@ -52,6 +52,7 @@ public class TransactionLogService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String create(TransactionLog transactionLog) {
-		return "server response: " + transactionLog.toString();
+		int rowcount = transactionLogDao.create(transactionLog);
+		return rowcount + "";
 	}
 }
