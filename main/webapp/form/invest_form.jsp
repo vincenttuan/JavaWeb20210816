@@ -178,7 +178,97 @@
 	    </tbody>
 	</table>
 	
+	<!-- Chart 繪圖 begin -->
+        <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+            google.charts.load('current', {packages: ['corechart']});
+            google.charts.setOnLoadCallback(function() {
+                queryHistQuotes('^TWII');
+            });
+            
+            function getYMDHMS(time) {
+                var myDate = new Date(time);
+                var YMD = addZero(myDate.getFullYear()) + "/" + addZero((myDate.getMonth() + 1)) + "/" + addZero(myDate.getDate());
+                var HMS = addZero(myDate.getHours()) + ":" + addZero(myDate.getMinutes()) + ":" + addZero(myDate.getSeconds());
+                var YMDHMS = YMD + " " + HMS;
+                return YMDHMS;
+            }
+            
+            function getYMD(time) {
+                var myDate = new Date(time);
+                var YMD = addZero(myDate.getFullYear()) + "/" + addZero((myDate.getMonth() + 1)) + "/" + addZero(myDate.getDate());
+                return YMD;
+            }
+            
+            function getMD(time) {
+                var myDate = new Date(time);
+                var MD = addZero((myDate.getMonth() + 1)) + "/" + addZero(myDate.getDate());
+                return MD;
+            }
+            
+            function getHMS(time) {
+                var myDate = new Date(time);
+                var HMS = addZero(myDate.getHours()) + ":" + addZero(myDate.getMinutes()) + ":" + addZero(myDate.getSeconds());
+                return HMS;
+            }
+            
+            function queryHistQuotes(symbol) {
+                $.get("/JavaWeb20210816/rest/price/histquotes/" + symbol, function (quotes, status) {
+                    console.log("quotes: " + quotes);
+                    drawChart(symbol, quotes);
+                });
+            }
+            
+            function addZero(n) {
+                return (n < 10) ? ("0" + n) : n;
+            }
+            
+            function drawChart(symbol, quotes) {
+                // 建立 data 欄位
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Date');
+                data.addColumn('number', 'High');
+                data.addColumn('number', 'Open');
+                data.addColumn('number', 'Close');
+                data.addColumn('number', 'Low');
+                data.addColumn('number', 'AdjClose');
+                data.addColumn('number', 'Volumn');
+                $.each(quotes, function (i, item) {
+                    var array = [getMD(quotes[i].date), quotes[i].high, quotes[i].open, quotes[i].close, quotes[i].low, quotes[i].adjClose, quotes[i].volume];
+                    data.addRow(array);
+                });
+                // 設定 chart 參數
+                var options = {
+                    title: symbol + ' 日K線圖',
+                    legend: 'none',
+                    vAxes: [
+                        {},
+                        {minValue: 1, maxValue: 6000000}
+                    ],
+                    series: {
+                        1: {targetAxisIndex: 0, type: 'line', color: '#e7711b'},
+                        2: {targetAxisIndex: 1, type: 'bars', color: '#cccccc'}
+                    },
+                    candlestick: {
+                        fallingColor: {strokeWidth: 0, fill: '#0f9d58'}, // green
+                        risingColor: {strokeWidth: 0, fill: '#a52714'}   // red
+                    },
+                    chartArea: {left: 50}
+                };
+                // 產生 chart 物件
+                var chart = new google.visualization.CandlestickChart(document.getElementById('container'));
+                // 繪圖
+                chart.draw(data, options);
+            }
+            
+        </script>
+	
+	<div id="container" style="width:90%; height: 400px; margin:10px"></div>
+	
+	<!-- Chart 繪圖 end -->
+	
 	<hr />
+	
 	<ol>
 		<li><a href="/JavaWeb20210816/rest/investor/">/JavaWeb20210816/rest/investor/</a></li>
 		<li><a href="/JavaWeb20210816/rest/investor/1">/JavaWeb20210816/rest/investor/1</a></li>
@@ -187,7 +277,8 @@
 		<li><a href="/JavaWeb20210816/rest/watchlist/">/JavaWeb20210816/rest/watchlist/</a></li>
 		<li><a href="/JavaWeb20210816/rest/watchlist/1">/JavaWeb20210816/rest/watchlist/1</a></li>
 		<li><a href="/JavaWeb20210816/rest/transactionlog/">/JavaWeb20210816/rest/transactionlog/</a></li>
-		<li><a href="/JavaWeb20210816/rest/transactionlog/1">/JavaWeb20210816/rest/transactionlog/1</a></li>
+		<li><a href="/JavaWeb20210816/rest/price/histquotes/2330.tw">/JavaWeb20210816/rest/price/histquotes/2330.tw</a></li>
+		<li><a href="/JavaWeb20210816/rest/price/histquotes/^TWII">/JavaWeb20210816/rest/price/histquotes/^TWII</a></li>
 		
 	</ol>
 	
