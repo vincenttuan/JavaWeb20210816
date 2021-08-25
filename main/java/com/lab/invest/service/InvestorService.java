@@ -64,6 +64,8 @@ public class InvestorService {
 				rts.setBid(stock.getQuote().getBid().doubleValue());
 				rts.setAsk(stock.getQuote().getAsk().doubleValue());
 				rts.setLastprice(stock.getQuote().getPrice().doubleValue());
+				rts.setChange(stock.getQuote().getChange().doubleValue());
+				rts.setChangePercent(stock.getQuote().getChangeInPercent().doubleValue());
 				rts.setVolume(stock.getQuote().getVolume());
 				rts.setTransdate(stock.getQuote().getLastTradeTime().getTime());
 			} catch(Exception e) {

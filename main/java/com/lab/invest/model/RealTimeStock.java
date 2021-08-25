@@ -8,6 +8,8 @@ public class RealTimeStock {
 	private Double bid; // 禦基
 	private Double ask; // 芥基
 	private Double lastprice; // 程Θユ基
+	private Double change; // 害禴
+	private Double changePercent; // 害禴碩
 	private Long volume; // 羆秖
 	private Date transdate; // 程ユ丁
 	
@@ -35,6 +37,18 @@ public class RealTimeStock {
 	public void setLastprice(Double lastprice) {
 		this.lastprice = lastprice;
 	}
+	public Double getChange() {
+		return change;
+	}
+	public void setChange(Double change) {
+		this.change = change;
+	}
+	public Double getChangePercent() {
+		return changePercent;
+	}
+	public void setChangePercent(Double changePercent) {
+		this.changePercent = changePercent;
+	}
 	public Long getVolume() {
 		return volume;
 	}
@@ -47,6 +61,7 @@ public class RealTimeStock {
 	public void setTransdate(Date transdate) {
 		this.transdate = transdate;
 	}
+	
 	
 	
 
