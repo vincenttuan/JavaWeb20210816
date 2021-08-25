@@ -7,11 +7,14 @@ public class WatchList {
 	private Integer id;
 	private Integer investid; // investor's id
 	private Integer stockpoolid;
-	private Date tdate;
+	private Date tdate; // 加入的日期
 	
 	// one to one 關聯
 	private Investor investor;
 	private StockPool stockPool;
+	
+	// 盤中即時資訊
+	private RealTimeStock realTimeStock;
 	
 	public WatchList() {
 		
@@ -70,6 +73,14 @@ public class WatchList {
 
 	public void setStockPool(StockPool stockPool) {
 		this.stockPool = stockPool;
+	}
+	
+	public RealTimeStock getRealTimeStock() {
+		return realTimeStock;
+	}
+
+	public void setRealTimeStock(RealTimeStock realTimeStock) {
+		this.realTimeStock = realTimeStock;
 	}
 
 	@Override

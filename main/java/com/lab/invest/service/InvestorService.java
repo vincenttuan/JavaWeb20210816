@@ -13,8 +13,12 @@ import com.lab.invest.dao.StockPoolDao;
 import com.lab.invest.dao.TransactionLogDao;
 import com.lab.invest.dao.WatchListDao;
 import com.lab.invest.model.Investor;
+import com.lab.invest.model.RealTimeStock;
 import com.lab.invest.model.TransactionLog;
 import com.lab.invest.model.WatchList;
+
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
 
 @Path("/investor")
 public class InvestorService {
@@ -45,13 +49,30 @@ public class InvestorService {
 		Investor investor = investorDao.get(id);
 		
 		// 加入關聯資訊
-		List<WatchList> watchLists = watchListDao.queryByInvestorId(investor.getId());
-		watchLists.stream().forEach(w -> w.setStockPool(stockPoolDao.get(w.getStockpoolid())));
-		investor.setWatchLists(watchLists);
-		
 		List<TransactionLog> transactionLogs = transactionLogDao.queryByInvestorId(investor.getId());
 		transactionLogs.stream().forEach(t -> t.setStockPool(stockPoolDao.get(t.getStockpoolid())));
 		investor.setTransactionLogs(transactionLogs);
+		
+		List<WatchList> watchLists = watchListDao.queryByInvestorId(investor.getId());
+		
+		watchLists.stream().forEach(w -> w.setStockPool(stockPoolDao.get(w.getStockpoolid())));
+		
+		watchLists.stream().forEach(w -> {
+			RealTimeStock rts = new RealTimeStock();
+			try {
+				Stock stock = YahooFinance.get(w.getStockPool().getSymbol());
+				rts.setBid(stock.getQuote().getBid().doubleValue());
+				rts.setAsk(stock.getQuote().getAsk().doubleValue());
+				rts.setLastprice(stock.getQuote().getPrice().doubleValue());
+				rts.setVolume(stock.getQuote().getVolume());
+				rts.setTransdate(stock.getQuote().getLastTradeTime().getTime());
+			} catch(Exception e) {
+				
+			}
+			w.setRealTimeStock(rts);
+		});
+		
+		investor.setWatchLists(watchLists);
 		
 		return investor;
 	}
