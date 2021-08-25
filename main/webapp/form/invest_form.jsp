@@ -34,8 +34,8 @@
 	        return x1 + x2;
 	    }
 		
-	    function buySell(bs, stockpoolid) {
-	    	console.log("investorid: " + investorid + ", bs: " + bs + ", stockpoolid: " + stockpoolid);
+	    function buySell(bs, stockpoolid, price) {
+	    	console.log("investorid: " + investorid + ", bs: " + bs + ", stockpoolid: " + stockpoolid + ", price: " + price);
 	    	var amount = 0;
 	    	switch(bs) {
 	    		case 1:
@@ -49,11 +49,12 @@
 	    	}
 	    	
 	    	var obj = new Object();
-	    	obj.investid = 1;
-	    	obj.stockpoolid = 4;
-	    	obj.bs = 'B';
-	    	obj.price = 100.5;
-	    	obj.amount = 3000;
+	    	obj.investid    = investorid;
+	    	obj.stockpoolid = stockpoolid;
+	    	obj.bs          = (bs == 1) ? 'B' : 'S';
+	    	obj.price       = price;
+	    	obj.amount      = amount;
+	    	
 	    	var jsonStr = JSON.stringify(obj);
 	    	
 	    	$.ajax({
@@ -97,7 +98,7 @@
 						$('#myWatchTable').append(
 							String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
 									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, numberFormat(item.realTimeStock.volume), item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100',
-									            '<input type="button" value="買" onclick="buySell(1, ' + item.stockPool.id + ')" />', '<input type="button" value="賣" onclick="buySell(2, ' + item.stockPool.id + ')" />')		
+									            '<input type="button" value="買" onclick="buySell(1, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />', '<input type="button" value="賣" onclick="buySell(2, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />')		
 						);
 					});
 					
