@@ -17,6 +17,22 @@ import com.lab.invest.model.WatchList;
 public class WatchListDao {
 	private Connection conn = DBConn.conn;
 	
+	public List<WatchList> queryByInvestorId(Integer investid) {
+		String sql = "select id, investid, stockpoolid, tdate from watchlist where investid = " + investid;
+		List<WatchList> watchLists = new ArrayList<>();
+		try(Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);) {
+			
+			// OR-Mapping
+			JdbcMapper<WatchList[]> mapper = JdbcMapperFactory.newInstance().newMapper(WatchList[].class);
+			mapper.stream(rs).forEach(array -> watchLists.addAll(Arrays.asList(array)));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return watchLists;
+	}
+	
 	public List<WatchList> queryAll() {
 		String sql = "select id, investid, stockpoolid, tdate from watchlist";
 		List<WatchList> watchLists = new ArrayList<>();

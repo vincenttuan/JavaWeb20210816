@@ -9,12 +9,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.lab.invest.dao.InvestorDao;
+import com.lab.invest.dao.TransactionLogDao;
+import com.lab.invest.dao.WatchListDao;
 import com.lab.invest.model.Investor;
+import com.lab.invest.model.TransactionLog;
+import com.lab.invest.model.WatchList;
 
 @Path("/investor")
 public class InvestorService {
 	
 	private InvestorDao investorDao = new InvestorDao();
+	private WatchListDao watchListDao = new WatchListDao();
+	private TransactionLogDao transactionLogDao = new TransactionLogDao();
 	
 	@Path("/hello")
 	@GET
@@ -34,7 +40,11 @@ public class InvestorService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Investor getOne(@PathParam("id") Integer id) {
-		return investorDao.get(id);
+		Investor investor = investorDao.get(id);
+		// 加入關聯資訊
+		investor.setWatchLists(watchListDao.queryByInvestorId(investor.getId()));
+		investor.setTransactionLogs(transactionLogDao.queryByInvestorId(investor.getId()));
+		return investor;
 	}
 	
 	

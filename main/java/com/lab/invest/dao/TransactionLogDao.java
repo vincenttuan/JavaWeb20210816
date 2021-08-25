@@ -17,6 +17,22 @@ import com.lab.invest.model.TransactionLog;
 public class TransactionLogDao {
 	private Connection conn = DBConn.conn;
 	
+	public List<TransactionLog> queryByInvestorId(Integer investid) {
+		String sql = "select id, investid, stockpoolid, bs, price, amount, tdate from transactionlog where investid=" + investid;
+		List<TransactionLog> transactionLogs = new ArrayList<>();
+		try(Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);) {
+			
+			// OR-Mapping
+			JdbcMapper<TransactionLog[]> mapper = JdbcMapperFactory.newInstance().newMapper(TransactionLog[].class);
+			mapper.stream(rs).forEach(array -> transactionLogs.addAll(Arrays.asList(array)));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return transactionLogs;
+	}
+	
 	public List<TransactionLog> queryAll() {
 		String sql = "select id, investid, stockpoolid, bs, price, amount, tdate from transactionlog";
 		List<TransactionLog> transactionLogs = new ArrayList<>();

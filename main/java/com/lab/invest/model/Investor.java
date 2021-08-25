@@ -1,12 +1,18 @@
 package com.lab.invest.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Investor {
 	private Integer id;
 	private String username;
 	private String email;
 	private Date tdate;
+	
+	// 增加查找關聯 --------------------------
+	private List<WatchList> watchLists;
+	private List<TransactionLog> transactionLogs;
+	
 	
 	public Investor() {
 		
@@ -49,6 +55,22 @@ public class Investor {
 
 	public void setTdate(Date tdate) {
 		this.tdate = tdate;
+	}
+	
+	public List<WatchList> getWatchLists() {
+		return watchLists;
+	}
+
+	public void setWatchLists(List<WatchList> watchLists) {
+		this.watchLists = watchLists;
+	}
+
+	public List<TransactionLog> getTransactionLogs() {
+		return transactionLogs;
+	}
+
+	public void setTransactionLogs(List<TransactionLog> transactionLogs) {
+		this.transactionLogs = transactionLogs;
 	}
 
 	@Override
