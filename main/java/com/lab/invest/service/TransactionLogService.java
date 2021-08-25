@@ -3,6 +3,7 @@ package com.lab.invest.service;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -55,4 +56,13 @@ public class TransactionLogService {
 		int rowcount = transactionLogDao.create(transactionLog);
 		return rowcount + "";
 	}
+	
+	@Path("/{id}")
+	@DELETE
+	@Produces(MediaType.TEXT_PLAIN)
+	public String delete(@PathParam("id") Integer id) {
+		int rowcount = transactionLogDao.delete(id);
+		return rowcount + "";
+	}
+	
 }

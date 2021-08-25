@@ -17,6 +17,18 @@ import com.lab.invest.model.TransactionLog;
 public class TransactionLogDao {
 	private Connection conn = DBConn.conn;
 	
+	public int delete(Integer id) {
+		String sql = "Delete from transactionlog where id=?";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setInt(1, id);
+			int rowcount = pstmt.executeUpdate();
+			return rowcount;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public int create(TransactionLog transactionLog) {
 		String sql = "Insert into transactionlog(investid, stockpoolid, bs, price, amount) values(?, ?, ?, ? ,?)";
 		
