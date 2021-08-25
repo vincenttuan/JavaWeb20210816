@@ -42,17 +42,17 @@
 					//-- 我的 Watch List ----------------------------
 					$('#myWatchTable tbody > tr').remove(); // 先將畫面暫存資料清除
 					$.each(datas.watchLists, function(i, item) { 
-						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td><td>{9}</td></tr>';
+						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td style="color:{12}">{5}</td><td style="color:{12}">{6}</td><td style="color:{12}">{7}</td><td style="color:{12}">{8}</td><td style="color:{12}">{9}</td><td>{10}</td><td>{11}</td></tr>';
 						$('#myWatchTable').append(
 							String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
-									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.volume, item.realTimeStock.transdate)		
+									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, item.realTimeStock.volume, item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100')		
 						);
 					});
 					
 				});
 			}
 			
-			getInvestorData(3);
+			getInvestorData(1);
 		});
 	</script>
 </head>
@@ -65,12 +65,12 @@
 	    <thead>
 	        <tr>
 	            <th>id</th>
-	            <th>bs</th>
-	            <th>symbol</th>
-	            <th>symbolname</th>
-	            <th>amount</th>
-	            <th>price</th>
-	            <th>tdate</th>
+	            <th>買賣</th>
+	            <th>商品代號</th>
+	            <th>商品名稱</th>
+	            <th>股數</th>
+	            <th>價格</th>
+	            <th>交易日</th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -85,16 +85,18 @@
 	    <thead>
 	        <tr>
 	            <th>id</th>
-	            <th>typeid</th>
-	            <th>symbol</th>
-	            <th>symbolname</th>
-	            <th>warning</th>
+	            <th>種類</th>
+	            <th>商品代號</th>
+	            <th>商品名稱</th>
+	            <th>警示股</th>
 	            <!-- 即時盤中資訊  -->
-	            <th>bid</th>
-	            <th>ask</th>
-	            <th>lastprice</th>
-	            <th>volume</th>
-	            <th>transdate</th>
+	            <th>買價</th>
+	            <th>賣價</th>
+	            <th>成交價</th>
+	            <th>漲跌</th>
+	            <th>漲跌幅%</th>
+	            <th>交易量</th>
+	            <th>交易時間</th>
 	        </tr>
 	    </thead>
 	    <tbody>
