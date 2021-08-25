@@ -67,44 +67,45 @@
 	    		processData: false,
 	    		success: function(result) {  // server 回傳的結果
 	    			console.log(result);
+	    			// 抓取網頁最新資料
+	    			getInvestorData();
 	    		}
 	    	});
 	    	
 	    }
 	    
+	    function getInvestorData() {
+			var url = '/JavaWeb20210816/rest/investor/' + investorid;
+			$.get(url, function(datas, status) { // datas : 回傳的 json 資料, status : 連線狀態
+				console.log(status);
+				console.log(datas);
+				//-- 歡迎訊息 ------------------------------------
+				$('#username').text(datas.username);
+				$('#email').text(datas.email);
+				//-- 我的交易紀錄 ---------------------------------
+				$('#myTransTable tbody > tr').remove(); // 先將畫面暫存資料清除
+				$.each(datas.transactionLogs, function(i, item) { 
+					var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td>{5}</td><td nowrap>{6}</td></tr>';
+					$('#myTransTable').append(
+						String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate)		
+					);
+				});
+				//-- 我的 Watch List ----------------------------
+				$('#myWatchTable tbody > tr').remove(); // 先將畫面暫存資料清除
+				$.each(datas.watchLists, function(i, item) { 
+					var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td style="color:{12}" align="right">{5}</td><td style="color:{12}" align="right">{6}</td><td style="color:{12}" align="right">{7}</td><td style="color:{12}" align="right">{8}</td><td style="color:{12}" align="right">{9}</td><td align="right">{10}</td><td nowrap>{11}</td><td nowrap>{13}</td><td nowrap>{14}</td></tr>';
+					$('#myWatchTable').append(
+						String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
+								            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, numberFormat(item.realTimeStock.volume), item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100',
+								            '<input type="button" value="買" onclick="buySell(1, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />', '<input type="button" value="賣" onclick="buySell(2, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />')		
+					);
+				});
+				
+			});
+		}
+	    
 	    // JQuery 程式進入點
 		$(document).ready(function() {
-			
-			function getInvestorData() {
-				var url = '/JavaWeb20210816/rest/investor/' + investorid;
-				$.get(url, function(datas, status) { // datas : 回傳的 json 資料, status : 連線狀態
-					console.log(status);
-					console.log(datas);
-					//-- 歡迎訊息 ------------------------------------
-					$('#username').text(datas.username);
-					$('#email').text(datas.email);
-					//-- 我的交易紀錄 ---------------------------------
-					$('#myTransTable tbody > tr').remove(); // 先將畫面暫存資料清除
-					$.each(datas.transactionLogs, function(i, item) { 
-						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td>{5}</td><td nowrap>{6}</td></tr>';
-						$('#myTransTable').append(
-							String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate)		
-						);
-					});
-					//-- 我的 Watch List ----------------------------
-					$('#myWatchTable tbody > tr').remove(); // 先將畫面暫存資料清除
-					$.each(datas.watchLists, function(i, item) { 
-						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td style="color:{12}" align="right">{5}</td><td style="color:{12}" align="right">{6}</td><td style="color:{12}" align="right">{7}</td><td style="color:{12}" align="right">{8}</td><td style="color:{12}" align="right">{9}</td><td align="right">{10}</td><td nowrap>{11}</td><td nowrap>{13}</td><td nowrap>{14}</td></tr>';
-						$('#myWatchTable').append(
-							String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
-									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, numberFormat(item.realTimeStock.volume), item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100',
-									            '<input type="button" value="買" onclick="buySell(1, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />', '<input type="button" value="賣" onclick="buySell(2, ' + item.stockPool.id + ', ' + item.realTimeStock.lastprice + ')" />')		
-						);
-					});
-					
-				});
-			}
-			
 			getInvestorData();
 		});
 	</script>
