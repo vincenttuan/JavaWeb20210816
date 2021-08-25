@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.lab.invest.dao.InvestorDao;
+import com.lab.invest.dao.StockPoolDao;
 import com.lab.invest.dao.TransactionLogDao;
 import com.lab.invest.dao.WatchListDao;
 import com.lab.invest.model.Investor;
@@ -21,6 +22,7 @@ public class InvestorService {
 	private InvestorDao investorDao = new InvestorDao();
 	private WatchListDao watchListDao = new WatchListDao();
 	private TransactionLogDao transactionLogDao = new TransactionLogDao();
+	private StockPoolDao stockPoolDao = new StockPoolDao();
 	
 	@Path("/hello")
 	@GET
@@ -41,9 +43,16 @@ public class InvestorService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Investor getOne(@PathParam("id") Integer id) {
 		Investor investor = investorDao.get(id);
+		
 		// 加入關聯資訊
-		investor.setWatchLists(watchListDao.queryByInvestorId(investor.getId()));
-		investor.setTransactionLogs(transactionLogDao.queryByInvestorId(investor.getId()));
+		List<WatchList> watchLists = watchListDao.queryByInvestorId(investor.getId());
+		watchLists.stream().forEach(w -> w.setStockPool(stockPoolDao.get(w.getStockpoolid())));
+		investor.setWatchLists(watchLists);
+		
+		List<TransactionLog> transactionLogs = transactionLogDao.queryByInvestorId(investor.getId());
+		transactionLogs.stream().forEach(t -> t.setStockPool(stockPoolDao.get(t.getStockpoolid())));
+		investor.setTransactionLogs(transactionLogs);
+		
 		return investor;
 	}
 	
