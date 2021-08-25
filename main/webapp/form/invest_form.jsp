@@ -19,6 +19,17 @@
 	        }
 	        return str;
 	    };
+	    function numberFormat(nStr) {
+	        nStr += '';
+	        x = nStr.split('.');
+	        x1 = x[0];
+	        x2 = x.length > 1 ? '.' + x[1] : '';
+	        var rgx = /(\d+)(\d{3})/;
+	        while (rgx.test(x1)) {
+	            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	        }
+	        return x1 + x2;
+	    }
 		
 	    // JQuery 程式進入點
 		$(document).ready(function() {
@@ -42,10 +53,10 @@
 					//-- 我的 Watch List ----------------------------
 					$('#myWatchTable tbody > tr').remove(); // 先將畫面暫存資料清除
 					$.each(datas.watchLists, function(i, item) { 
-						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td style="color:{12}">{5}</td><td style="color:{12}">{6}</td><td style="color:{12}">{7}</td><td style="color:{12}">{8}</td><td style="color:{12}">{9}</td><td>{10}</td><td>{11}</td></tr>';
+						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td style="color:{12}" align="right">{5}</td><td style="color:{12}" align="right">{6}</td><td style="color:{12}" align="right">{7}</td><td style="color:{12}" align="right">{8}</td><td style="color:{12}" align="right">{9}</td><td align="right">{10}</td><td>{11}</td></tr>';
 						$('#myWatchTable').append(
 							String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
-									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, item.realTimeStock.volume, item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100')		
+									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, numberFormat(item.realTimeStock.volume), item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100')		
 						);
 					});
 					
