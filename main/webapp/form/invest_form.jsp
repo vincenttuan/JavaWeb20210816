@@ -8,6 +8,19 @@
 	<meta charset="UTF-8">
 	<title>Invest Form</title>
 	<script>
+		// 公用程式
+		String.format = function () {
+	        if (arguments.length == 0)
+	            return null;
+	        var str = arguments[0];
+	        for (var i = 1; i < arguments.length; i++) {
+	            var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+	            str = str.replace(re, arguments[i]);
+	        }
+	        return str;
+	    };
+		
+	    // JQuery 程式進入點
 		$(document).ready(function() {
 			
 			function getInvestorData(id) {
@@ -15,8 +28,18 @@
 				$.get(url, function(datas, status) { // datas : 回傳的 json 資料, status : 連線狀態
 					console.log(status);
 					console.log(datas);
+					//-- 歡迎訊息 ------------------------------------
 					$('#username').text(datas.username);
 					$('#email').text(datas.email);
+					//-- 我的交易紀錄 ---------------------------------
+					$('#myTransTable tbody > tr').remove(); // 先將畫面暫存資料清除
+					$.each(datas.transactionLogs, function(i, item) { 
+						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>';
+						$('#myTransTable').append(
+							String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate)		
+						);
+					});
+					
 				});
 			}
 			
@@ -27,7 +50,24 @@
 <body style="padding: 15px">
 	Hello <span id="username"></span> <span id="email"></span> 
 	<p />
-	
+	我的交易紀錄
+	<p />
+	<table id="myTransTable" class="pure-table pure-table-bordered">
+	    <thead>
+	        <tr>
+	            <th>id</th>
+	            <th>bs</th>
+	            <th>symbol</th>
+	            <th>symbolname</th>
+	            <th>amount</th>
+	            <th>price</th>
+	            <th>tdate</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    			       
+	    </tbody>
+	</table>
 	
 	<hr />
 	<ol>
