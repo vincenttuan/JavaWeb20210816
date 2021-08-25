@@ -9,7 +9,7 @@
 	<title>Invest Form</title>
 	<script>
 		// 投資人 id
-    	var investorid = 1;
+    	var investorid = 2;
     
 		// 公用程式
 		String.format = function () {
@@ -22,6 +22,7 @@
 	        }
 	        return str;
 	    };
+	    
 	    function numberFormat(nStr) {
 	        nStr += '';
 	        x = nStr.split('.');
@@ -74,6 +75,21 @@
 	    	
 	    }
 	    
+	    function deleteItem(id) {
+	    	$.ajax({
+	    		url: '/JavaWeb20210816/rest/transactionlog/' + id,
+	    		type: 'DELETE',
+	    		async: true,
+	    		cache: false,
+	    		processData: false,
+	    		success: function(result) {  // server 回傳的結果
+	    			console.log(result);
+	    			// 抓取網頁最新資料
+	    			getInvestorData();
+	    		}
+	    	});
+	    }
+	    
 	    function getInvestorData() {
 			var url = '/JavaWeb20210816/rest/investor/' + investorid;
 			$.get(url, function(datas, status) { // datas : 回傳的 json 資料, status : 連線狀態
@@ -85,9 +101,9 @@
 				//-- 我的交易紀錄 ---------------------------------
 				$('#myTransTable tbody > tr').remove(); // 先將畫面暫存資料清除
 				$.each(datas.transactionLogs, function(i, item) { 
-					var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td>{5}</td><td nowrap>{6}</td></tr>';
+					var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td>{5}</td><td nowrap>{6}</td><td nowrap>{7}</td></tr>';
 					$('#myTransTable').append(
-						String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate)		
+						String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate, '<input type="button" value="刪除" onclick="deleteItem(' + item.id + ')" />')		
 					);
 				});
 				//-- 我的 Watch List ----------------------------
@@ -125,6 +141,7 @@
 	            <th nowrap>股數</th>
 	            <th nowrap>價格</th>
 	            <th nowrap>時間</th>
+	            <th nowrap>刪除</th>
 	        </tr>
 	    </thead>
 	    <tbody>
