@@ -8,6 +8,9 @@
 	<meta charset="UTF-8">
 	<title>Invest Form</title>
 	<script>
+		// 投資人 id
+    	var investorid = 1;
+    
 		// 公用程式
 		String.format = function () {
 	        if (arguments.length == 0)
@@ -32,13 +35,26 @@
 	    }
 		
 	    function buySell(bs, stockpoolid) {
-	    	console.log(bs + ", " + stockpoolid);
+	    	console.log("investorid: " + investorid + ", bs: " + bs + ", stockpoolid: " + stockpoolid);
+	    	var amount = 0;
+	    	switch(bs) {
+	    		case 1:
+	    			amount = prompt("買進數量", "1000");
+	    			console.log(amount);
+	    			break;
+	    		case 2:
+	    			amount = prompt("賣出數量", "1000");
+	    			console.log(amount);
+	    			break;
+	    	}
+	    	
 	    }
+	    
 	    // JQuery 程式進入點
 		$(document).ready(function() {
 			
-			function getInvestorData(id) {
-				var url = '/JavaWeb20210816/rest/investor/' + id;
+			function getInvestorData() {
+				var url = '/JavaWeb20210816/rest/investor/' + investorid;
 				$.get(url, function(datas, status) { // datas : 回傳的 json 資料, status : 連線狀態
 					console.log(status);
 					console.log(datas);
@@ -67,7 +83,7 @@
 				});
 			}
 			
-			getInvestorData(1);
+			getInvestorData();
 		});
 	</script>
 </head>
