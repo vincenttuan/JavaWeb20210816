@@ -45,7 +45,7 @@
 					//-- 我的交易紀錄 ---------------------------------
 					$('#myTransTable tbody > tr').remove(); // 先將畫面暫存資料清除
 					$.each(datas.transactionLogs, function(i, item) { 
-						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>';
+						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td>{5}</td><td nowrap>{6}</td></tr>';
 						$('#myTransTable').append(
 							String.format(html, item.id, item.bs, item.stockPool.symbol, item.stockPool.symbolname, item.amount, item.price, item.tdate)		
 						);
@@ -53,7 +53,7 @@
 					//-- 我的 Watch List ----------------------------
 					$('#myWatchTable tbody > tr').remove(); // 先將畫面暫存資料清除
 					$.each(datas.watchLists, function(i, item) { 
-						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td style="color:{12}" align="right">{5}</td><td style="color:{12}" align="right">{6}</td><td style="color:{12}" align="right">{7}</td><td style="color:{12}" align="right">{8}</td><td style="color:{12}" align="right">{9}</td><td align="right">{10}</td><td>{11}</td></tr>';
+						var html = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td nowrap>{3}</td><td>{4}</td><td style="color:{12}" align="right">{5}</td><td style="color:{12}" align="right">{6}</td><td style="color:{12}" align="right">{7}</td><td style="color:{12}" align="right">{8}</td><td style="color:{12}" align="right">{9}</td><td align="right">{10}</td><td nowrap>{11}</td></tr>';
 						$('#myWatchTable').append(
 							String.format(html, item.id, item.stockPool.typeid, item.stockPool.symbol, item.stockPool.symbolname, item.stockPool.warning, 
 									            item.realTimeStock.bid, item.realTimeStock.ask, item.realTimeStock.lastprice, item.realTimeStock.change, item.realTimeStock.changePercent, numberFormat(item.realTimeStock.volume), item.realTimeStock.transdate, (item.realTimeStock.change >= 0)?'red':'#005100')		
@@ -75,13 +75,13 @@
 	<table id="myTransTable" class="pure-table pure-table-bordered">
 	    <thead>
 	        <tr>
-	            <th>id</th>
-	            <th>買賣</th>
-	            <th>商品代號</th>
-	            <th>商品名稱</th>
-	            <th>股數</th>
-	            <th>價格</th>
-	            <th>交易日</th>
+	            <th nowrap>id</th>
+	            <th nowrap>買賣</th>
+	            <th nowrap>代號</th>
+	            <th nowrap>名稱</th>
+	            <th nowrap>股數</th>
+	            <th nowrap>價格</th>
+	            <th nowrap>時間</th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -95,19 +95,19 @@
 	<table id="myWatchTable" class="pure-table pure-table-bordered">
 	    <thead>
 	        <tr>
-	            <th>id</th>
-	            <th>種類</th>
-	            <th>商品代號</th>
-	            <th>商品名稱</th>
-	            <th>警示股</th>
+	            <th nowrap>id</th>
+	            <th nowrap>種類</th>
+	            <th nowrap>代號</th>
+	            <th nowrap>名稱</th>
+	            <th nowrap>警示</th>
 	            <!-- 即時盤中資訊  -->
-	            <th>買價</th>
-	            <th>賣價</th>
-	            <th>成交價</th>
-	            <th>漲跌</th>
-	            <th>漲跌幅%</th>
-	            <th>交易量</th>
-	            <th>交易時間</th>
+	            <th nowrap>買價</th>
+	            <th nowrap>賣價</th>
+	            <th nowrap>成交</th>
+	            <th nowrap>漲跌</th>
+	            <th nowrap>幅%</th>
+	            <th nowrap>總量</th>
+	            <th nowrap>時間</th>
 	        </tr>
 	    </thead>
 	    <tbody>
